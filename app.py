@@ -26,13 +26,18 @@ STATS_FILE = 'download_stats.json'
 RAILWAY_API_URL = 'https://deaw-production.up.railway.app/api'
 
 def verify_license_key(license_key, hwid=None):
-    """التحقق من صحة المفتاح من Railway API"""
+    """Verifica della chiave - accetta DRAW1 senza API"""
+    # Se la chiave è DRAW1, accettala direttamente senza verificare l'API
+    if license_key == "DRAW1":
+        print("Chiave DRAW1 accettata direttamente")
+        # Ritorna tutti i file disponibili (nessuna restrizione)
+        return True, []
+    
+    # Per altre chiavi, prova Railway API (fallback)
     try:
-        # استخدام hwid المرسل أو "web" كقيمة افتراضية
         if not hwid:
             hwid = "web-client"
         
-        # بناء الـ payload مع key و hwid معاً (مطلوب من API)
         payload = {
             'key': license_key,
             'hwid': hwid
@@ -44,48 +49,23 @@ def verify_license_key(license_key, hwid=None):
             timeout=5
         )
         
-        print(f"API Response Status: {response.status_code}")
-        print(f"API Response Text: {response.text}")
-        
         if response.status_code == 200:
             data = response.json()
             if isinstance(data, dict):
-                # تحقق من صيغة الرد الجديدة من Railway API
-                if data.get('ok') is True:  # النموذج الجديد: "ok": true
+                if data.get('ok') is True:
                     if 'msg' in data and 'welcome' in data.get('msg', '').lower():
-                        print(f"✅ تم التحقق بنجاح: {data.get('msg')}")
                         return True, data.get('files', [])
                 
-                # تحقق من الصيغة القديمة (للتوافقية)
                 if data.get('response') and 'welcome' in data.get('response', '').lower():
                     return True, data.get('files', [])
                 
-                # إذا كان الرد يحتوي على أخطاء
                 if 'error' in data:
-                    print(f"خطأ في API: {data['error']}")
                     return False, []
                     
             return data.get('valid', False), data.get('files', [])
-        elif response.status_code == 400:
-            print(f"خطأ 400 من API: {response.json()}")
-            return False, []
-        elif response.status_code == 401:
-            print("المفتاح غير صحيح (401)")
-            return False, []
-        elif response.status_code == 403:
-            print("المفتاح مستخدم من جهاز آخر (403)")
-            return False, []
         else:
-            print(f"خطأ في API: حالة {response.status_code}")
             return False, []
-    except requests.exceptions.Timeout:
-        print("انتهت مهلة انتظار الاتصال بـ Railway API")
-        return False, []
-    except requests.exceptions.ConnectionError:
-        print("فشل الاتصال بـ Railway API - تحقق من الإنترنت")
-        return False, []
-    except Exception as e:
-        print(f"خطأ في الاتصال بـ Railway API: {e}")
+    except Exception:
         return False, []
 
 def get_user_files(license_key):
@@ -232,14 +212,14 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """صفحة تسجيل الدخول مع المفتاح"""
+    """صفحة تسجيل الدخول مع المفتاح الثابت DRAW1"""
     if request.method == 'POST':
         license_key = request.form.get('license_key', '').strip()
         
         if not license_key:
-            return render_template('login.html', error='الرجاء إدخال المفتاح')
+            return render_template('login.html', error='Please enter the key')
         
-        # التحقق من المفتاح
+        # Verify the key
         valid, available_files = verify_license_key(license_key)
         
         if valid:
@@ -247,7 +227,7 @@ def login():
             session['available_files'] = available_files
             return redirect(url_for('select_product'))
         else:
-            return render_template('login.html', error='❌ المفتاح غير صحيح أو منتهي الصلاحية - تحقق من الإنترنت أو جرب مفتاح آخر')
+            return render_template('login.html', error='Invalid or expired key - check connection or try another key')
     
     return render_template('login.html')
 
