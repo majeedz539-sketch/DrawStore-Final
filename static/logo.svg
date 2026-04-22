@@ -1,0 +1,18 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#0099cc;stop-opacity:0.4" />
+        </linearGradient>
+    </defs>
+    
+    <!-- خلفية دائرية -->
+    <circle cx="100" cy="100" r="98" fill="none" stroke="url(#circleGradient)" stroke-width="3" opacity="0.6"/>
+    <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(0, 212, 255, 0.2)" stroke-width="1"/>
+    
+    <!-- مثلث خارجي أبيض (السهم الكبير) -->
+    <path d="M 100 35 L 155 135 L 65 135 Z" fill="white" opacity="0.95"/>
+    
+    <!-- مثلث داخلي (السهم الصغير) -->
+    <path d="M 110 65 L 140 125 L 80 125 Z" fill="rgba(0, 212, 255, 0.4)" opacity="0.8"/>
+</svg>

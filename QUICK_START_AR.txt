@@ -1,0 +1,71 @@
+🎯 DrawStore - تعليمات سريعة
+================================
+
+📌 ما تم إضافته/تعديله:
+
+1️⃣ نظام الترخيص ✅
+   ├─ صفحة login.html (جديدة)
+   ├─ التحقق من المفتاح
+   ├─ جلسات آمنة
+   └─ تسجيل خروج سهل
+
+2️⃣ روابط التواصل ✅
+   ├─ Discord: https://discord.gg/Ad66M4CW8v
+   ├─ TikTok: https://www.tiktok.com/@drawstore
+   └─ روابط مباشرة في الفوتر
+
+3️⃣ نظام الملفات ✅
+   ├─ فلترة حسب النوع
+   ├─ كل مستخدم يرى ملفاته فقط
+   ├─ اختيار من قائمة منسدلة
+   └─ إحصائيات لكل ملف
+
+4️⃣ اللوقو المحسّن ✅
+   ├─ بدون animations معقدة
+   ├─ بدون glow effects
+   └─ نظيف وبسيط
+
+5️⃣ Railway API Integration ✅
+   ├─ التحقق من المفتاح
+   ├─ الحصول على الملفات المتاحة
+   └─ معالجة الأخطاء
+
+---
+
+🚀 الخطوات الأولى:
+
+1. pip install -r requirements.txt
+2. python test_system.py
+3. python app.py
+4. افتح: http://localhost:5000
+
+---
+
+🔑 مفاتيح الدخول:
+
+للاختبار، احصل على مفتاح من:
+- Railway API الخاص بك
+- أو اطلب من الأدمن
+
+---
+
+📱 المنصات المدعومة:
+
+✅ Windows / Mac / Linux
+✅ Desktop
+✅ Mobile (Responsive)
+✅ Tablets
+
+---
+
+❓ أسئلة؟
+
+- Discord: https://discord.gg/Ad66M4CW8v
+- اقرأ: README_NEW.md
+- اقرأ: SYSTEM_UPDATES.md
+
+---
+
+✨ تم إنشاؤه بواسطة: GitHub Copilot
+📅 التاريخ: 22 أبريل 2024
+⚡ الحالة: جاهز للاستخدام

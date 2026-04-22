@@ -1,0 +1,21 @@
+{
+  "name": "DrawStore-Loader",
+  "description": "منصة تحميل السكربتات والإضافات",
+  "keywords": ["flask", "download", "scripts", "arabic"],
+  "env": {
+    "FLASK_ENV": {
+      "description": "Flask environment",
+      "value": "production"
+    },
+    "FLASK_DEBUG": {
+      "description": "Flask debug mode",
+      "value": "0"
+    }
+  },
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
