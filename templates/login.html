@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DrawStore - تسجيل الدخول</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -13,28 +14,30 @@
         }
         
         :root {
-            --primary: #0f1419;
-            --secondary: #1a1f2e;
-            --accent: #00d4ff;
-            --accent-dark: #0099cc;
-            --text-light: #e0e0e0;
-            --text-lighter: #a0a0a0;
-            --success: #00ff88;
-            --error: #ff3366;
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0f;
+            --bg-card: rgba(15, 15, 25, 0.95);
+            --accent-blue: #0066ff;
+            --accent-cyan: #00d4ff;
+            --accent-purple: #6b21ff;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --border-color: rgba(0, 102, 255, 0.3);
         }
         
         body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            position: relative;
         }
         
-        /* Background Animation */
+        /* Animated Background */
         body::before {
             content: '';
             position: fixed;
@@ -43,8 +46,31 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 153, 204, 0.1) 0%, transparent 50%);
+                radial-gradient(ellipse at 20% 20%, rgba(0, 102, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(107, 33, 255, 0.05) 0%, transparent 70%);
+            animation: bgPulse 8s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes bgPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        /* Grid Pattern */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 102, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 102, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
             pointer-events: none;
             z-index: 0;
         }
@@ -53,28 +79,31 @@
             position: relative;
             z-index: 1;
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
             padding: 20px;
         }
         
         .login-card {
-            background: rgba(26, 31, 46, 0.9);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 20px;
+            background: var(--bg-card);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
             padding: 50px 40px;
-            box-shadow: 0 30px 60px rgba(0, 212, 255, 0.2);
-            animation: slideIn 0.6s ease;
+            box-shadow: 
+                0 0 60px rgba(0, 102, 255, 0.3),
+                0 0 100px rgba(0, 212, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            animation: cardSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        @keyframes slideIn {
+        @keyframes cardSlideIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(40px) scale(0.95);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
         }
         
@@ -83,165 +112,219 @@
             margin-bottom: 40px;
         }
         
-        .logo-svg {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 20px;
-            animation: none;
+        .logo-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            animation: logoFloat 3s ease-in-out infinite;
+            box-shadow: 0 10px 40px rgba(0, 102, 255, 0.4);
+        }
+        
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
         .login-card h1 {
-            font-size: 2.5em;
-            background: linear-gradient(135deg, var(--accent) 0%, #00ff88 100%);
+            font-size: 2.8em;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 50%, var(--accent-purple) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
         }
         
         .login-subtitle {
-            color: var(--text-lighter);
-            margin-bottom: 30px;
+            color: var(--text-secondary);
             font-size: 1em;
+            font-weight: 400;
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 28px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 10px;
-            color: var(--accent);
+            margin-bottom: 12px;
+            color: var(--accent-cyan);
             font-weight: 600;
-            font-size: 0.95em;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .input-wrapper i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-blue);
+            font-size: 1.1em;
+            transition: all 0.3s ease;
         }
         
         .form-group input {
             width: 100%;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(0, 212, 255, 0.2);
-            border-radius: 10px;
-            color: var(--text-light);
+            padding: 18px 50px 18px 18px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(0, 102, 255, 0.2);
+            border-radius: 12px;
+            color: var(--text-primary);
             font-size: 1em;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Poppins', sans-serif;
         }
         
         .form-group input::placeholder {
-            color: var(--text-lighter);
+            color: var(--text-secondary);
         }
         
         .form-group input:focus {
             outline: none;
-            border-color: var(--accent);
-            background: rgba(0, 212, 255, 0.05);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+            border-color: var(--accent-cyan);
+            background: rgba(0, 102, 255, 0.05);
+            box-shadow: 
+                0 0 0 4px rgba(0, 212, 255, 0.1),
+                0 0 30px rgba(0, 212, 255, 0.2);
         }
         
-        .form-group input:valid {
-            border-color: var(--success);
+        .form-group input:focus + i {
+            color: var(--accent-cyan);
         }
         
         .submit-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-            color: #000;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            color: #ffffff;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
+            border-radius: 12px;
+            font-size: 1.05em;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 15px;
+            gap: 12px;
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 30px rgba(0, 102, 255, 0.3);
         }
         
         .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 102, 255, 0.4);
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
         }
         
         .submit-btn:active {
-            transform: translateY(0);
+            transform: translateY(-1px);
         }
         
         .error-message {
-            background: rgba(255, 51, 102, 0.1);
-            border: 1px solid var(--error);
-            color: var(--error);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            background: rgba(255, 0, 80, 0.1);
+            border: 1px solid rgba(255, 0, 80, 0.3);
+            color: #ff0050;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            animation: slideIn 0.3s ease;
+            gap: 12px;
+            animation: errorSlide 0.4s ease;
+        }
+        
+        @keyframes errorSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
         
         .error-message i {
-            font-size: 1.2em;
-        }
-        
-        .info-text {
-            text-align: center;
-            color: var(--text-lighter);
-            font-size: 0.9em;
-            line-height: 1.6;
+            font-size: 1.3em;
         }
         
         .divider {
             height: 1px;
-            background: rgba(0, 212, 255, 0.1);
-            margin: 30px 0;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+            margin: 35px 0;
+        }
+        
+        .info-text {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            line-height: 1.7;
+        }
+        
+        .info-text strong {
+            color: var(--accent-cyan);
         }
         
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 25px;
+            gap: 18px;
+            margin-top: 30px;
         }
         
         .social-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            color: var(--accent);
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: rgba(0, 102, 255, 0.1);
+            border: 1px solid var(--border-color);
+            color: var(--accent-cyan);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.2em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.3em;
             text-decoration: none;
         }
         
         .social-btn:hover {
-            background: rgba(0, 212, 255, 0.2);
-            border-color: var(--accent);
-            transform: translateY(-3px);
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-color: var(--accent-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+            color: #ffffff;
         }
         
-        /* Responsive */
         @media (max-width: 600px) {
             .login-card {
-                padding: 30px 20px;
+                padding: 40px 25px;
             }
             
             .login-card h1 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
             
-            .logo-svg {
-                width: 100px;
-                height: 100px;
+            .logo-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5em;
             }
         }
     </style>
@@ -250,35 +333,38 @@
     <div class="login-container">
         <div class="login-card">
             <div class="logo-section">
-                <img src="{{ url_for('static', filename='logo.svg') }}" alt="DrawStore Logo" class="logo-svg">
-                <h1>DrawStore</h1>
-                <p class="login-subtitle">Enter your license key</p>
+                <div class="logo-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h1>DRAWSTORE</h1>
+                <p class="login-subtitle">أدخل مفتاح الترخيص الخاص بك</p>
             </div>
             
             {% if error %}
             <div class="error-message">
-                <i class="fas fa-exclamation-circle"></i>
+                <i class="fas fa-exclamation-triangle"></i>
                 <span>{{ error }}</span>
             </div>
             {% endif %}
             
             <form method="POST" action="{{ url_for('login') }}">
                 <div class="form-group">
-                    <label for="license_key">
-                        <i class="fas fa-key"></i> License Key
-                    </label>
-                    <input 
-                        type="text" 
-                        id="license_key" 
-                        name="license_key" 
-                        placeholder="Enter your license key"
-                        required
-                        autofocus
-                    >
+                    <label for="license_key">مفتاح الترخيص</label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="license_key" 
+                            name="license_key" 
+                            placeholder="أدخل مفتاح الترخيص"
+                            required
+                            autofocus
+                        >
+                        <i class="fas fa-key"></i>
+                    </div>
                 </div>
                 
                 <button type="submit" class="submit-btn">
-                    <i class="fas fa-sign-in-alt"></i> Login
+                    <i class="fas fa-arrow-right"></i> دخول
                 </button>
             </form>
             
@@ -286,8 +372,8 @@
             
             <div class="info-text">
                 <p>
-                    <strong>New user?</strong><br>
-                    Contact us via the channels below to get a license key
+                    <strong>مستخدم جديد؟</strong><br>
+                    تواصل معنا عبر القنوات أدناه للحصول على مفتاح الترخيص
                 </p>
             </div>
             
